@@ -27,4 +27,26 @@ public class Solution {
             invertRoots(right);
         }
     }
+    //1672. Richest Customer Wealth
+    public int maximumWealth(int[][] accounts, int cont, int richest) {
+        if(cont >= accounts.length){
+            return richest;
+        }
+        return 0;
+    }
+
+    public int sumList(int[] listToSum, int cont, int sumValue){
+        if(cont == listToSum.length){
+            return sumValue;
+        }
+        else{
+            sumValue += listToSum[cont];
+            cont++;
+            return sumList(listToSum, cont, sumValue);
+        }
+    }
+
+    public void main(String[] args){
+        System.out.print(sumList(new int[]{1,1,1,1}, 0, 0));
+    }
 }
