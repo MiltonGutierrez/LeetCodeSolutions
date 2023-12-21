@@ -28,13 +28,44 @@ public class Solution {
         }
     }
     //1672. Richest Customer Wealth
+
+    public int maximumWealth(int[][] accounts){
+        if(accounts.length > 0){
+            return maximumWealth(accounts, 0, 0);
+        }
+        else{
+            return 0;
+        }
+    }
+    
+    /**
+     * Sums all the values of of list of the matrix and returns the largest
+     * @param accounts
+     * @param cont
+     * @param richest
+     * @return
+     */
     public int maximumWealth(int[][] accounts, int cont, int richest) {
         if(cont >= accounts.length){
             return richest;
-        }
-        return 0;
-    }
+        }  
+        else{
+            int possibleRichest = sumList(accounts[cont], 0, 0);
+            if(possibleRichest > richest){
+                richest = possibleRichest;
+            }
+            cont++;
+            return maximumWealth(accounts, cont, richest);
+        } 
 
+    }
+    /**
+     * Sums the values of the list an returns the result
+     * @param listToSum
+     * @param cont
+     * @param sumValue
+     * @return
+     */
     public int sumList(int[] listToSum, int cont, int sumValue){
         if(cont == listToSum.length){
             return sumValue;
@@ -46,7 +77,7 @@ public class Solution {
         }
     }
 
-    public void main(String[] args){
-        System.out.print(sumList(new int[]{1,1,1,1}, 0, 0));
+    public static void main(String[] args){
+
     }
 }
