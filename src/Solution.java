@@ -129,12 +129,25 @@ public class Solution {
         return ans;        
     }
     
-    // TC: O(n), SC: O(n)
+    //Problem 1342. Number of steps to Reduce a Number to Zero
+    public int numberOfSteps(int n){
+        return numberOfSteps(n, 0);
+
+    }
+
+    public int numberOfSteps(int n, int cont){
+        if(n == 0){
+            return cont;
+        }
+        else if(n % 2 == 0){
+            return numberOfSteps(n /2, cont + 1);
+        }
+        else{
+            return numberOfSteps(n-1, cont + 1);
+        }
+    }
     public static void main(String[] args){
         Solution s = new Solution();
-        List<String> fizz = s.fizzBuzz(15);
-        for(String i: fizz){
-            System.out.println(i);
-        }
+        System.out.println(s.numberOfSteps(14));
     }
 }
