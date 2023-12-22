@@ -1,3 +1,7 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class to save my LeetCode solutions
  * @author Milton Andres Gutierrez Lopez
@@ -77,7 +81,43 @@ public class Solution {
         }
     }
 
-    public static void main(String[] args){
+    //412. Fizz Buzz
+    public List<String> fizzBuzz(int n){
+        ArrayList<String> fizzBuzzResult = new ArrayList<>();
+        return fizzBuzz(fizzBuzzResult, n, 1);
+            
+    }
 
+    public List<String> fizzBuzz(List<String> fizzBuzz, int n, int cont){
+        if(cont == n + 1){
+            return fizzBuzz;
+        }
+        else if(cont % 3 == 0 && cont % 5 == 0){
+            fizzBuzz.add("FizzBuzz");
+            cont++;
+            return fizzBuzz(fizzBuzz, n, cont);
+        }
+        else if(cont % 3 == 0){
+            fizzBuzz.add("Fizz");
+            cont++;
+            return fizzBuzz(fizzBuzz, n, cont);
+        }
+        else if(cont % 5 == 0){
+            fizzBuzz.add("Buzz");
+            cont++;
+            return fizzBuzz(fizzBuzz, n, cont);
+        }
+        else{
+            fizzBuzz.add(Integer.toString(cont));
+            cont++;
+            return fizzBuzz(fizzBuzz, n, cont);
+        }
+    }
+    public static void main(String[] args){
+        Solution s = new Solution();
+        List<String> fizz = s.fizzBuzz(15);
+        for(String i: fizz){
+            System.out.println(i);
+        }
     }
 }
