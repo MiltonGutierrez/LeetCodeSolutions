@@ -146,8 +146,30 @@ public class Solution {
             return numberOfSteps(n-1, cont + 1);
         }
     }
+
+    //Problem 876 Middle of the linked list
+    public ListNode middleNode(ListNode head){
+        int length = (listNodeLength(head) / 2) + 1;
+        ListNode middNode = head;
+        for(int i = 0; i < length; i++){
+            middNode = middNode.next;
+        }
+        return middNode;
+    }
+
+    public int listNodeLength(ListNode head){
+        int length = 1;
+        if(head.next != null){
+            ListNode next = head.next;
+            while (next != null) {
+                next = next.next;
+                length++;
+            }
+        }
+        return length;
+        
+    }
     public static void main(String[] args){
-        Solution s = new Solution();
-        System.out.println(s.numberOfSteps(14));
+        System.out.println(7/2);
     }
 }
