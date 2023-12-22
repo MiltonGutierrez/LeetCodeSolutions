@@ -1,5 +1,9 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -169,7 +173,42 @@ public class Solution {
         return length;
         
     }
-    public static void main(String[] args){
-        System.out.println(7/2);
+
+    //Problem 383. RansomNote (not efficient)
+    public boolean canConstruct(String ransomNote, String magazine) {
+        boolean result = true;
+        HashMap<Character, Integer> magazinHashMap = getHashMap(magazine);
+        HashMap<Character, Integer> ramsonNoteHashMap = getHashMap(ransomNote);
+        char[] charsToCompare = ransomNote.toCharArray();
+        for(char c: charsToCompare){
+            if(magazinHashMap.containsKey(c) && result){
+                result = ramsonNoteHashMap.get(c) <= magazinHashMap.get(c);
+            }
+            else{
+                return false;
+            }
+        }   
+        return result;
     }
-}
+
+    public HashMap<Character, Integer> getHashMap(String toConstruct){
+        HashMap<Character, Integer> result = new HashMap<>();    
+        char[] chars = toConstruct.toCharArray();
+        for(char c: chars){
+            if(!result.containsKey(c)){
+                result.put(c, 1);
+            }
+            else{
+                Integer i = result.get(c) + 1; 
+                result.remove(c);
+                result.put(c, i);
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args){
+        Solution s = new Solution();
+        System.out.println(s.canConstruct("bg", "efjbdfbdgfjhhaiigfhbaejahgfbbgbjagbddfgdiaigdadhcfcj"));
+    } 
+} 
