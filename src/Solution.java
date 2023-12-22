@@ -113,6 +113,23 @@ public class Solution {
             return fizzBuzz(fizzBuzz, n, cont);
         }
     }
+
+    //Ternary Solution (Not mine) link: https://leetcode.com/problems/fizz-buzz/solutions/2628136/java-3-approaches-easy
+    public List fizzBuzz2(int n) {
+        List ans = new ArrayList<>();
+        for(int i = 1; i <= n; i++){
+            ans.add(
+                i % 15 == 0 ? "FizzBuzz" :
+                i % 5 == 0  ? "Buzz" :
+                i % 3 == 0  ? "Fizz" :
+                String.valueOf(i)
+            );
+        }
+    
+        return ans;        
+    }
+    
+    // TC: O(n), SC: O(n)
     public static void main(String[] args){
         Solution s = new Solution();
         List<String> fizz = s.fizzBuzz(15);
