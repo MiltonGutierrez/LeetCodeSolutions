@@ -228,8 +228,42 @@ public class Solution {
         return result;
     }
 
+    //RansomeNote solution 3 (not my idea) link: https://leetcode.com/problems/ransom-note/solutions/1671552/1ms-100-easy-explanation-java-solution/
+
+    public boolean canConstruct3(String ransomeNote, String magazine){
+        int[] counter = new int[26];
+        for(char c: magazine.toCharArray()){
+            counter[c - 'a']++;
+        }
+        for(char c: ransomeNote.toCharArray()){
+            if(counter[c - 'a'] == 0) return false;
+            counter[c - 'a']--;
+        }
+        return true;
+    }
+    //Exercises from Card Track arrays
+    public int findMaxConsecutiveOnes(int[] nums){
+        int largetsConsecutive = 0;
+        int possibleLargestConsecutive = 0;
+        for(int i = 0; i < nums.length; i++){
+            if(nums[i] == 1) possibleLargestConsecutive++;
+            else{
+                if(possibleLargestConsecutive > largetsConsecutive){
+                    largetsConsecutive = possibleLargestConsecutive;
+                }
+                possibleLargestConsecutive = 0;
+
+            }
+
+        }
+        if(possibleLargestConsecutive > largetsConsecutive){
+            largetsConsecutive = possibleLargestConsecutive;
+        }
+        return largetsConsecutive;   
+    }
+
     public static void main(String[] args){
         Solution s = new Solution();
-        System.out.println(s.canConstruct2("bg", "efjbdfbdgfjhhaiigfhbaejahgfbbgbjagbddfgdiaigdadhcfcj"));
+        System.out.println(s.findMaxConsecutiveOnes(new int[]{0,0,0,0,1,1,1,1,1,0,1,1,1,1,1,1}));
     } 
 } 
