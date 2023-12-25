@@ -173,36 +173,57 @@ public class Solution {
         return length;
         
     }
-
-    //Problem 383. RansomNote (not efficient)
-    public boolean canConstruct(String ransomNote, String magazine) {
-        boolean result = true;
-        HashMap<Character, Integer> magazinHashMap = getHashMap(magazine);
-        HashMap<Character, Integer> ramsonNoteHashMap = getHashMap(ransomNote);
-        char[] charsToCompare = ransomNote.toCharArray();
-        for(char c: charsToCompare){
-            if(magazinHashMap.containsKey(c) && result){
-                result = ramsonNoteHashMap.get(c) <= magazinHashMap.get(c);
+        //Problem 383. RansomNote (not efficient) first solution
+        public boolean canConstruct1(String ransomNote, String magazine) {
+            boolean result = true;
+            HashMap<Character, Integer> magazinHashMap = getHashMap1(magazine);
+            HashMap<Character, Integer> ramsonNoteHashMap = getHashMap1(ransomNote);
+            char[] charsToCompare = ransomNote.toCharArray();
+            for(char c: charsToCompare){
+                if(magazinHashMap.containsKey(c) && result){
+                    result = ramsonNoteHashMap.get(c) <= magazinHashMap.get(c);
+                }
+                else{
+                    return false;
+                }
+            }   
+            return result;
+        }
+    
+        public HashMap<Character, Integer> getHashMap1(String toConstruct){
+            HashMap<Character, Integer> result = new HashMap<>();    
+            char[] chars = toConstruct.toCharArray();
+            for(char c: chars){
+                if(!result.containsKey(c)){
+                    result.put(c, 1);
+                }
+                else{
+                    Integer i = result.get(c) + 1; 
+                    result.remove(c);
+                    result.put(c, i);
+                }
             }
-            else{
+            return result;
+        }
+    //Problem 383. RansomNote (not efficient) (Video solution )
+    public boolean canConstruct2(String ransomNote, String magazine) {
+        HashMap<Character, Integer> magazinHashMap = getHashMap2(magazine);
+        for(char c: ransomNote.toCharArray()){
+            int currentCount = magazinHashMap.getOrDefault(c, 0);
+            if(currentCount == 0){
                 return false;
             }
+
+            magazinHashMap.put(c, currentCount - 1);
         }   
-        return result;
+        return true;
     }
 
-    public HashMap<Character, Integer> getHashMap(String toConstruct){
+    public HashMap<Character, Integer> getHashMap2(String toConstruct){
         HashMap<Character, Integer> result = new HashMap<>();    
-        char[] chars = toConstruct.toCharArray();
-        for(char c: chars){
-            if(!result.containsKey(c)){
-                result.put(c, 1);
-            }
-            else{
-                Integer i = result.get(c) + 1; 
-                result.remove(c);
-                result.put(c, i);
-            }
+        for(char c: toConstruct.toCharArray()){
+            int currentCount = result.getOrDefault(c, 0);
+            result.put(c, currentCount + 1);
         }
         return result;
     }
