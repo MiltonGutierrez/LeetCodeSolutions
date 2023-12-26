@@ -180,10 +180,22 @@ public class ArraysCardTrack{
         }
     }
 
+    public void duplicateZeros1(int[] arr) {
+        int n = arr.length;
+
+        int[] temp = arr.clone();//for copy arr
+
+        int ind = 0;
+
+        for(int i=0; ind<n; i++){
+            arr[ind++] = temp[i];
+            if(temp[i] == 0 && ind != n)arr[ind++] = 0;
+        }
+    }
     public static void main(String[] args) {
         ArraysCardTrack a = new ArraysCardTrack();
         int[] duplicateZeros = {1,0,2,3,0,4,5,0};
-        a.duplicateZeros(duplicateZeros);
+        a.duplicateZeros1(duplicateZeros);
         for (int n: duplicateZeros){
             System.out.println(n);
         }
