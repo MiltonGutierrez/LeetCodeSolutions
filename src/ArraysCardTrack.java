@@ -1,5 +1,6 @@
 
 import java.lang.Math;
+import java.util.Arrays;
 
 public class ArraysCardTrack{
     public int findMaxConsecutiveOnes(int[] nums){
@@ -35,7 +36,7 @@ public class ArraysCardTrack{
         return evenNumbers;
     }
 
-    public static void mergeSort(int[] array) {
+    /*public static void mergeSort(int[] array) {
         if (array == null || array.length <= 1) {
             return;
         }
@@ -73,7 +74,7 @@ public class ArraysCardTrack{
         while (j < rightArray.length) {
             array[k++] = rightArray[j++];
         }
-    }
+    }*/
 
     /**
      * Solution with better runtime (better logic)
@@ -89,7 +90,7 @@ public class ArraysCardTrack{
         }
         return evenNumbers;
     }
-    public int[] sortedSquares(int[] nums){
+    /*public int[] sortedSquares(int[] nums){
         if(nums[0] >= 0){
             return sortedSquaresPositives(nums);
         }
@@ -122,13 +123,52 @@ public class ArraysCardTrack{
             nums[index] = nums[index] * nums[index];
         }
         return nums;
-    }
+    }*/
+    /*  Less eficient but simplier
+    public int[] sortedSquares(int[] nums){
+        for(int i = 0; i < nums.length; i++){
+            nums[i] = nums[i] * nums[i];
+        }
+        Arrays.sort(nums);
+        return nums;        
+    }*/
+    
+    //Faster solution (not mine) I adjusted it to make it more readable for me
+    public int[] sortedSquares(int[] nums) {
+        int[] output = new int[nums.length];
+        int p1 = 0, p2 = nums.length - 1;
+        for (int i = output.length - 1; i >= 0; i--) {
+            if(Math.abs(nums[p1]) > Math.abs(nums[p2])){
+                System.out.println("nums[p1] > nums[p2]");
+                System.out.println("Index loop " + i);
+                System.out.println("numeros p1: " + nums[p1]);
+                System.out.println("Index p1 " + p1);
+                System.out.println("Index p1++" + (p1+1));
+                output[i] = nums[p1] * nums[p1];
+                p1++;
+                System.out.println("Output[i]: " + output[i]);
+                System.out.println();
+            }
+            else{
+                System.out.println("nums[p1] < nums[p2]");
+                System.out.println("Index loop " + i);
+                System.out.println("Index p2 " + p2);
+                System.out.println("Index p2--" + (p2-1));
+                System.out.println("numeros p2: " + nums[p2]);
+                output[i] = nums[p2] * nums[p2];
+                p2--;
+                System.out.println("Output[i]: " + output[i]);
+                System.out.println();
+            }
+        }
 
+        return output;
+    }
 
     public static void main(String[] args) {
         ArraysCardTrack a = new ArraysCardTrack();
-        int[] sorted = a.sortedSquares(new int[]{-12,-1,0,1,2,3,4});
-        for(int n: sorted){
+        int[] sorted = a.sortedSquares(new int[]{-10,-5,-1,0,1,5,10});
+        for (int n: sorted){
             System.out.println(n);
         }
         System.out.println();
