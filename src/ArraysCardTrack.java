@@ -164,11 +164,27 @@ public class ArraysCardTrack{
 
         return output;
     }
+    //First Solution 
+    public void duplicateZeros(int[] arr) {
+        for(int i = 0; i < arr.length; i++){
+            if(arr[i] == 0){
+                moveToTheRigth(arr, i);
+                i++;
+            }
+        }
+    }
+
+    public void moveToTheRigth(int[] arr, int startIndex){
+        for(int i = arr.length - 1; i > startIndex; i--){
+            arr[i] = arr[i - 1];
+        }
+    }
 
     public static void main(String[] args) {
         ArraysCardTrack a = new ArraysCardTrack();
-        int[] sorted = a.sortedSquares(new int[]{-10,-5,-1,0,1,5,10});
-        for (int n: sorted){
+        int[] duplicateZeros = {1,0,2,3,0,4,5,0};
+        a.duplicateZeros(duplicateZeros);
+        for (int n: duplicateZeros){
             System.out.println(n);
         }
         System.out.println();
