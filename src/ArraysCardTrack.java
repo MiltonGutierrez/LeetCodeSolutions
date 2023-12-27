@@ -193,7 +193,7 @@ public class ArraysCardTrack{
         }
     }
     //My solution based on the mergeSort algoritm, and duplicate zeros.
-    
+
     public void merge(int[] nums1, int m, int[] nums2, int n) {
         int[] temporal = new int[m];
         System.arraycopy(nums1, 0, temporal, 0, m);
@@ -218,16 +218,60 @@ public class ArraysCardTrack{
         }
 
     }
-
+    /**
+     * Withouth comments
+     * @param nums
+     * @param val
+     * @return
+     */
+    public int removeElement(int[] nums, int val) {
+        int nonValElements = 0;
+        int i = 0, j = nums.length -1;
+        while (i < nums.length -1 && j >= 0){
+            if(j == i){
+                break;
+            }
+            if(nums[i] == val || nums[j] == val){
+                if(nums[i] == val){
+                    int valueToChange = nums[j];
+                    nums[j] = nums[i];
+                    nums[i] = valueToChange;
+                    nonValElements++;
+                    j--;
+                    if( j < 0){
+                        break;
+                    }
+                }
+                if(nums[j] == val){
+                    nonValElements++;
+                    j--;
+                    if( j < 0){
+                        break;
+                    }
+                }
+            }
+            else{
+                i++;
+            }
+        }
+        if(nums.length == 1 && nums[0] == val){
+            nums[0] = 0;
+            return 0;
+        }
+        else if(nums.length % 2 != 0  && nums[0] == val){
+            nonValElements++;
+        }
+        return nums.length -nonValElements;
+    }
     public static void main(String[] args) {
         ArraysCardTrack a = new ArraysCardTrack();
-        int[] nums1 = {1,2,3,0,0,0,0};
-        int[] nums2 = {1,3,4,5};
-        a.merge(nums1, 3, nums2, 4);
+        int[] nums1 = {3,3,3,3,3};
+        int ele = a.removeElement(nums1, 3);
         for (int n: nums1){
             System.out.println(n);
         }
         System.out.println();
+        System.out.println(ele);
     }
 
 }
