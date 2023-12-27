@@ -192,11 +192,39 @@ public class ArraysCardTrack{
             if(temp[i] == 0 && ind != n)arr[ind++] = 0;
         }
     }
+    //My solution based on the mergeSort algoritm, and duplicate zeros.
+    
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int[] temporal = new int[m];
+        System.arraycopy(nums1, 0, temporal, 0, m);
+        int i = 0, j = 0, k = 0; // i para el arreglo copia, k para el arrego nums2, k para el arreglo nums1
+        while(i < m && j < n && k < m + n){
+            if(temporal[i] < nums2[j]){
+                nums1[k++] = temporal[i++];
+            }
+            else{
+                nums1[k++] = nums2[j++];
+            }
+        }
+        if(j < n){
+            while(k < m + n){
+                nums1[k++] = nums2[j++];
+            }
+        }
+        else if (i < m){
+            while(k < m + n){
+                nums1[k++] = temporal[i++];
+            }
+        }
+
+    }
+
     public static void main(String[] args) {
         ArraysCardTrack a = new ArraysCardTrack();
-        int[] duplicateZeros = {1,0,2,3,0,4,5,0};
-        a.duplicateZeros1(duplicateZeros);
-        for (int n: duplicateZeros){
+        int[] nums1 = {1,2,3,0,0,0,0};
+        int[] nums2 = {1,3,4,5};
+        a.merge(nums1, 3, nums2, 4);
+        for (int n: nums1){
             System.out.println(n);
         }
         System.out.println();
