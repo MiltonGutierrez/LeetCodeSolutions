@@ -263,15 +263,36 @@ public class ArraysCardTrack{
         }
         return nums.length -nonValElements;
     }
+
+    public int removeElement1(int[] nums, int val) {
+        int counter = 0;
+        for (int i = 0; i < nums.length; i++){
+            System.out.println("Nums en pos i: "+ nums[i] + " i " + i);
+            if(nums[i] != val){
+                System.out.println("Nums en la posicion counter: " + nums[counter] + " counter " +counter);
+                nums[counter] = nums[i];
+                counter ++;
+                System.out.println("couter: " + counter);
+            }
+            System.out.println();
+            
+            for (int n: nums){
+                System.out.print(n + " ");
+            }
+            System.out.println();  
+        }
+
+        return counter;
+    }
+
     public static void main(String[] args) {
         ArraysCardTrack a = new ArraysCardTrack();
-        int[] nums1 = {3,3,3,3,3};
-        int ele = a.removeElement(nums1, 3);
+        int[] nums1 = {4,4,0,1,2,0,3};
+        int ele = a.removeElement1(nums1, 0);
         for (int n: nums1){
             System.out.println(n);
         }
         System.out.println();
-        System.out.println(ele);
     }
 
 }
