@@ -36,11 +36,27 @@ public class RemoveDuplicates{
         int newLength = nums.length - revomedDuplicates;
         return newLength;
     }
+
+    public static int removeDuplicates2(int[] nums){
+        int revomedDuplicates = 0;
+        int temporalNumber = nums[0];
+        for(int i = 1; i< nums.length; i++){
+            if(temporalNumber == nums[i]){
+                revomedDuplicates++;
+            }   
+            else{
+                temporalNumber = nums[i];
+                nums[i - revomedDuplicates] = temporalNumber; 
+                //In the case a different number is found, 
+                //just move it to the place the first intance of the repeated number was.
+            }
+        }
+        return nums.length - revomedDuplicates;
+    }
     public static void main(String[] args) {
-        int[] nums = {1,1,1,1,1,1,1};
-        System.out.println(RemoveDuplicates.removeDuplicates(nums));
-        System.out.println(Arrays.toString(nums));
-        
+        int[] nums = {-1,2,3,4,4,4,5,6,7,7,7};
+        System.out.println(RemoveDuplicates.removeDuplicates2(nums));
+        System.out.println(Arrays.toString(nums));        
     }
     
 }
