@@ -79,6 +79,6 @@ public class ValidMountainArray {
 
     public static void main(String[] args) {
         int[] arr = {0,1,2,3,4,7,10,3,2,6,3,1};
-        System.out.println(ValidMountainArray.validMountainArray2(arr));
+        System.out.println(ValidMountainArray.validMountainArray3(arr));
     }
 }
