@@ -267,49 +267,65 @@ public class Solution {
         Integer thirdMax = null;
         for (int i = 1; i < nums.length; i++) {
             if (nums[i] > firstMax) {
-                if(secondMax != null || !firstMax.equals(secondMax)){
+                if (secondMax != null || !firstMax.equals(secondMax)) {
                     thirdMax = secondMax;
                     secondMax = firstMax;
                 }
                 firstMax = nums[i];
-                System.out.println("INDEX: " + i+ " NUM " + nums[i] + " FIRST");
+                System.out.println("INDEX: " + i + " NUM " + nums[i] + " FIRST");
                 System.out.println("FIRST " + firstMax + " SECOND " + secondMax + " THIRD " + thirdMax);
-            } 
-            else {
+            } else {
                 if (secondMax != null && nums[i] > secondMax && nums[i] != firstMax) {
                     thirdMax = secondMax;
-                    secondMax = nums[i]; 
-                    System.out.println("INDEX: " + i+ " NUM " + nums[i]+ " SECOND ");
+                    secondMax = nums[i];
+                    System.out.println("INDEX: " + i + " NUM " + nums[i] + " SECOND ");
                     System.out.println("FIRST " + firstMax + " SECOND " + secondMax + " THIRD " + thirdMax);
-                }
-                else if(secondMax != null && nums[i] < secondMax){
-                    if(thirdMax == null) thirdMax = nums[i];
-                    if(nums[i] > thirdMax) thirdMax = nums[i];
-                    System.out.println("INDEX: " + i+ " NUM " + nums[i]+ " SECOND ");
+                } else if (secondMax != null && nums[i] < secondMax) {
+                    if (thirdMax == null)
+                        thirdMax = nums[i];
+                    if (nums[i] > thirdMax)
+                        thirdMax = nums[i];
+                    System.out.println("INDEX: " + i + " NUM " + nums[i] + " SECOND ");
                     System.out.println("FIRST " + firstMax + " SECOND " + secondMax + " THIRD " + thirdMax);
-                }
-                else if(secondMax == null && nums[i] != firstMax){
-                    secondMax = nums[i]; 
+                } else if (secondMax == null && nums[i] != firstMax) {
+                    secondMax = nums[i];
                 }
             }
         }
         System.out.println("FINAL: FIRST " + firstMax + " SECOND " + secondMax + " THIRD " + thirdMax);
-        return (thirdMax != null) ? thirdMax : firstMax; //Posibble solution, just need to figure how to assign minimin values or
+        return (thirdMax != null) ? thirdMax : firstMax; // Posibble solution, just need to figure how to assign minimin
+                                                         // values or
     }
-    /**public static int thirdMax(int[] nums) {
-        Arrays.sort(nums);
-        System.out.println(Arrays.toString(nums));
-        if(nums.length > 2){
-            return (nums[nums.length - 3] != nums[nums.length-2]) ? nums[nums.length - 3] : nums[nums.length - 1];
+
+    public static int thirdMax2(int[] nums) {
+        long firstMax = Long.MIN_VALUE;
+        long secondMax = Long.MIN_VALUE;
+        long thirdMax = Long.MIN_VALUE;
+        for (int num : nums) {
+            if (num > firstMax) {
+                thirdMax = secondMax;
+                secondMax = firstMax;
+                firstMax = num;
+                System.out.println("NUM " + num + " FIRST");
+                System.out.println("FIRST " + firstMax + " SECOND " + secondMax + " THIRD " + thirdMax);
+            } else if (firstMax > num && secondMax < num) {
+                thirdMax = secondMax;
+                secondMax = num;
+                System.out.println("NUM " + num + " SECOND");
+                System.out.println("FIRST " + firstMax + " SECOND " + secondMax + " THIRD " + thirdMax);
+            } else if (num > thirdMax && num < secondMax) {
+                thirdMax = num;
+                System.out.println("NUM " + num + " THIRD");
+                System.out.println("FIRST " + firstMax + " SECOND " + secondMax + " THIRD " + thirdMax);
+            }
         }
-        return nums[nums.length - 1];
-    }*/
-
-
+        System.out.println("FINAL: FIRST "+firstMax+" SECOND "+secondMax+" THIRD "+thirdMax);
+        return(thirdMax==Long.MIN_VALUE)?(int)firstMax:(int)thirdMax;
+    }
 
     public static void main(String[] args) {
-        int[] nums = {5,2,4,1,3,6,0};
+        int[] nums = {3,2,1};
 
-        System.out.println(Solution.thirdMax(nums));
+        System.out.println(Solution.thirdMax2(nums));
     }
 }
