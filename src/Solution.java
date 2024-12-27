@@ -261,13 +261,13 @@ public class Solution {
         return largetsConsecutive;
     }//
 
-    /*public static int thirdMax(int[] nums) {
+    public static int thirdMax(int[] nums) {
         Integer firstMax = nums[0];
         Integer secondMax = null;
         Integer thirdMax = null;
         for (int i = 1; i < nums.length; i++) {
             if (nums[i] > firstMax) {
-                if(secondMax == null && firstMax != secondMax){
+                if(secondMax != null || !firstMax.equals(secondMax)){
                     thirdMax = secondMax;
                     secondMax = firstMax;
                 }
@@ -276,36 +276,39 @@ public class Solution {
                 System.out.println("FIRST " + firstMax + " SECOND " + secondMax + " THIRD " + thirdMax);
             } 
             else {
-                if (secondMax == null && nums[i] > secondMax && nums[i] != firstMax) {
+                if (secondMax != null && nums[i] > secondMax && nums[i] != firstMax) {
                     thirdMax = secondMax;
                     secondMax = nums[i]; 
                     System.out.println("INDEX: " + i+ " NUM " + nums[i]+ " SECOND ");
                     System.out.println("FIRST " + firstMax + " SECOND " + secondMax + " THIRD " + thirdMax);
                 }
-                else if(secondMax == null && nums[i] < secondMax){
-                    thirdMax = nums[i];
+                else if(secondMax != null && nums[i] < secondMax){
+                    if(thirdMax == null) thirdMax = nums[i];
+                    if(nums[i] > thirdMax) thirdMax = nums[i];
                     System.out.println("INDEX: " + i+ " NUM " + nums[i]+ " SECOND ");
                     System.out.println("FIRST " + firstMax + " SECOND " + secondMax + " THIRD " + thirdMax);
+                }
+                else if(secondMax == null && nums[i] != firstMax){
+                    secondMax = nums[i]; 
                 }
             }
         }
         System.out.println("FINAL: FIRST " + firstMax + " SECOND " + secondMax + " THIRD " + thirdMax);
-        return (thirdMax !=null) ? thirdMax : firstMax;*/ //Posibble solution, just need to figure how to assign minimin values or
-    
-
-    public static int thirdMax(int[] nums) {
+        return (thirdMax != null) ? thirdMax : firstMax; //Posibble solution, just need to figure how to assign minimin values or
+    }
+    /**public static int thirdMax(int[] nums) {
         Arrays.sort(nums);
         System.out.println(Arrays.toString(nums));
         if(nums.length > 2){
             return (nums[nums.length - 3] != nums[nums.length-2]) ? nums[nums.length - 3] : nums[nums.length - 1];
         }
         return nums[nums.length - 1];
-    }
+    }*/
 
 
 
     public static void main(String[] args) {
-        int[] nums = {2,2,3,1};
+        int[] nums = {5,2,4,1,3,6,0};
 
         System.out.println(Solution.thirdMax(nums));
     }
