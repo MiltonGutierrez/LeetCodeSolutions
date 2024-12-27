@@ -293,8 +293,7 @@ public class Solution {
             }
         }
         System.out.println("FINAL: FIRST " + firstMax + " SECOND " + secondMax + " THIRD " + thirdMax);
-        return (thirdMax != null) ? thirdMax : firstMax; // Posibble solution, just need to figure how to assign minimin
-                                                         // values or
+        return (thirdMax != null) ? thirdMax : firstMax; 
     }
 
     public static int thirdMax2(int[] nums) {
