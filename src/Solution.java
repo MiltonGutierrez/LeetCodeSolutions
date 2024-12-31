@@ -353,10 +353,79 @@ public class Solution {
         return nums;   
     }
 
+    public static void lookForGreaterNumber(int[] nums, int left){
+        int right = left + 1;
+        int leftNum = Math.abs(nums[left]);
+        int rightNum = Math.abs(nums[right]);
+        
+        while (leftNum < rightNum && nums[right] < 0){
+            System.out.println("LEFT: "+leftNum+" RIGHT: "+rightNum);
+
+            nums[right] = -leftNum;
+            nums[left] = -rightNum;
+            right++;
+            left++;
+            leftNum = Math.abs(nums[left]);
+            rightNum = Math.abs(nums[right]);
+            System.out.println(Arrays.toString(nums));
+        }
+        System.out.println("FINAL " + Arrays.toString(nums));
+        
+    }
+
+    public static int[] sortedSquares2(int[] nums) {
+        if(nums[0] >= 0){
+            for(int i = 0; i < nums.length; i++){
+                nums[i] = nums[i] * nums[i];
+            }
+            return nums;
+        }
+        int left = 0;
+        int right = nums.length -1;
+
+        while (left <= right){
+            int leftNum = Math.abs(nums[left]);
+            int rightNum = Math.abs(nums[right]);
+            System.out.println("LEFT: "+leftNum+" RIGHT: "+rightNum);
+            System.out.println();
+            if(leftNum > rightNum){
+                System.out.println("LEFT > RIGHT");
+                nums[right] = leftNum * leftNum;
+                nums[left] = -rightNum;
+                System.out.println("nums[right] "+nums[right]+" nums[left] "+nums[left]);
+                right--;
+                
+                System.out.println("LEFT: "+left+" RIGHT: "+right);
+                System.out.println(Arrays.toString(nums));
+                System.out.println();
+                lookForGreaterNumber(nums, left);
+            }
+            else if(rightNum > leftNum){
+                System.out.println("RIGHT > LEFT");
+                nums[right] = rightNum * rightNum;
+               System.out.println("nums[right] "+nums[right]+" nums[left] "+nums[left]);
+                right--;
+                System.out.println("LEFT: "+left+" RIGHT: "+right);
+                System.out.println(Arrays.toString(nums));
+                System.out.println();
+            }
+            else if (rightNum == leftNum){
+                nums[right] = rightNum * rightNum;
+                right--;
+            }
+            else{
+                left++;
+            }
+
+            
+        }
+        return nums;
+    }
+
 
 
     public static void main(String[] args) {
-        int[] nums = {-7,-3,2,3,11};
-        System.out.println(Arrays.toString(Solution.sortedSquares(nums)));
+        int[] nums = {-4,-1,0,3,10};
+        System.out.println(Arrays.toString(Solution.sortedSquares2(nums)));
     }
 }
