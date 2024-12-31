@@ -324,14 +324,15 @@ public class Solution {
     }
 
     public static  List<Integer> findDisappearedNumbers(int[] nums) {
-        int[] nums2 = new int[nums.length];
-        ArrayList<Integer> missingIntegers = new ArrayList<>();
-        for(int i = 0; i < nums.length ; i++){
-            nums2[nums[i] - 1] = nums[i];
-        }   
-        System.out.println(Arrays.toString(nums2));
-        for(int i=1;i<=nums2.length; i++){
-            if(nums2[i-1] == 0) missingIntegers.add(i);
+        int[] nums2 = new int[nums.length+1];
+        for(int num: nums){
+            nums2[num] = num;
+        }  
+        ArrayList<Integer> missingIntegers = new ArrayList<>(); 
+        for(int i=1; i<nums2.length; i++){
+            if(nums2[i] == 0){
+                missingIntegers.add(i);
+            }
         }
         return missingIntegers;
     }
