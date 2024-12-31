@@ -337,10 +337,26 @@ public class Solution {
         return missingIntegers;
     }
 
+    public static void squareAnArray(int[] arr){
+        for(int i = 0; i < arr.length; i++){
+            arr[i] = arr[i] * arr[i];
+        }
+    }
+
+    public static int[] sortedSquares(int[] nums) {
+        if(nums[0] >= 0){
+            squareAnArray(nums);
+            return nums;
+        }
+        squareAnArray(nums);
+        Arrays.sort(nums);
+        return nums;   
+    }
+
 
 
     public static void main(String[] args) {
-        int[] nums = {4,3,2,7,8,2,3,1};
-        System.out.println(Solution.findDisappearedNumbers(nums));
+        int[] nums = {-7,-3,2,3,11};
+        System.out.println(Arrays.toString(Solution.sortedSquares(nums)));
     }
 }
