@@ -422,42 +422,38 @@ public class Solution {
         return nums;
     }
 
+
     public static int[] sortedSquares3(int[] nums) {
-        if(nums[0] >= 0){
-            for(int i = 0; i < nums.length; i++){
-                nums[i] = nums[i] * nums[i];
-            }
-            return nums;
-        }
+        int[] result = new int[nums.length];
         int left = 0;
         int right = nums.length -1;
-
+        int index = nums.length -1;
         while(left <= right){
             int leftNum = nums[left] * nums[left];
             int rightNum = nums[right] * nums[right];
             if(leftNum > rightNum){
-                nums[right] = leftNum;
-                nums[left] = rightNum;
-                right--;
-            }
-            else if (rightNum > leftNum || rightNum == leftNum){
-                nums[right] = rightNum;
-                right--;
-            }
-
-            else{
+                result[index] = leftNum;
                 left++;
             }
-
+            else if(leftNum < rightNum){
+                result[index] = rightNum;
+                right--;
+            }
+            else if(leftNum == rightNum){
+                result[index--] = rightNum;
+                if(index >= 0 ){
+                    result[index] = leftNum;
+                }
+                left++;
+                right--;
+            }
+            index--;
         }
-        return nums;
+        return result;
     }
 
-
-
-
     public static void main(String[] args) {
-        int[] nums = {-7,-3,2,3,11};
+        int[] nums = {-1,1};
         System.out.println(Arrays.toString(Solution.sortedSquares3(nums)));
     }
 }
