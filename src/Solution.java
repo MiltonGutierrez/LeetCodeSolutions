@@ -461,19 +461,15 @@ public class Solution {
         n--;
         while(n >= 0 && i >= 0 && m >= 0){
             if(nums1[m] > nums2[n]){
-                nums1[i] = nums1[m];
-                m--;
+                nums1[i] = nums1[m--];
             }
             else{
-                nums1[i] = nums2[n];
-                n--;
+                nums1[i] = nums2[n--];
             }
             i--;
         }
         while(n >= 0 && i >= 0){
-            nums1[i] = nums2[n];
-            i--;
-            n--;
+            nums1[i--] = nums2[n--];
         }
     }
 
