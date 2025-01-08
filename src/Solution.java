@@ -452,8 +452,31 @@ public class Solution {
         return result;
     }
 
+    public static void merge(int[] nums1, int m, int[] nums2, int n) {
+        int i = n+m-1;
+        if(m == 0){
+            nums1[0] = nums2[i];
+        }
+        m--;
+        n--;
+        while(i >= 0 && n >= 0 && m >= 0){
+            if(nums1[m] > nums2[n]){
+                nums1[i] = nums1[m];
+                m--;
+            }
+            else{
+                nums1[i] = nums2[n];
+                n--;
+            }
+            i--;
+        }
+    }
+
     public static void main(String[] args) {
-        int[] nums = {-1,1};
-        System.out.println(Arrays.toString(Solution.sortedSquares3(nums)));
+        int[] nums1 = {2,0};
+        int[] nums2 = {1};
+        
+        Solution.merge(nums1, 1, nums2, 1);
+        System.out.println(Arrays.toString(nums1));
     }
 }
