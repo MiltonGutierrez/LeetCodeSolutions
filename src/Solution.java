@@ -459,7 +459,7 @@ public class Solution {
         }
         m--;
         n--;
-        while(i >= 0 && n >= 0 && m >= 0){
+        while(n >= 0 && i >= 0 && m >= 0){
             if(nums1[m] > nums2[n]){
                 nums1[i] = nums1[m];
                 m--;
@@ -470,13 +470,18 @@ public class Solution {
             }
             i--;
         }
+        while(n >= 0 && i >= 0){
+            nums1[i] = nums2[n];
+            i--;
+            n--;
+        }
     }
 
     public static void main(String[] args) {
-        int[] nums1 = {2,0};
-        int[] nums2 = {1};
+        int[] nums1 = {1,2,3,0,0,0};
+        int[] nums2 = {2,5,6};
         
-        Solution.merge(nums1, 1, nums2, 1);
+        Solution.merge(nums1, 3, nums2, 3);
         System.out.println(Arrays.toString(nums1));
     }
 }
